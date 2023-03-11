@@ -11,6 +11,7 @@
           <v-divider></v-divider>
           <v-card-text class="list-wrapper" style="overflow-y: scroll; height: 60vh">
             <ListToDo 
+              v-if="todos"
               v-bind:selectItem="selectItem"
               v-bind:todos="todos"
               v-on:removeItem="removeItem" 
@@ -31,6 +32,7 @@
 </template>
 
 <script>
+import { uuid } from 'vue-uuid'
 import ListToDo from './ListItem.vue'
 
 
@@ -41,22 +43,20 @@ export default {
       selectItem: -1,
       todos: [ 
             {   
-                id: 0,
+                id:  uuid.v4(),
                 title: 'Call the dentist',
                 checked: false,
             },
              {   
-                id: 1,
+                id:  uuid.v4(),
                 title: 'Call the dentist2',
                 checked: false,
             },
              {   
-                id: 2,
+                id:  uuid.v4(),
                 title: 'Call the dentist3',
                 checked: false,
             },
-      
-
         ],
   }),
   components: {
@@ -67,11 +67,12 @@ export default {
         this.todos = this.todos.filter(item => item.id !== id)
       },
       editItem (id, value) { 
-        this.todos[id].title = value
+        const currentItem = this.todos.find(item => item.id === id)
+        currentItem.title = value
       },
       handleClickAdd () {
         // this.todos.unshift({title: '', checked: false, id: this.todos.length })
-        this.todos.push({title: '', checked: false, id: this.todos.length }); 
+        this.todos.push({title: 'New Item', checked: false, id: uuid.v4()}); 
         this.todos = [...this.todos]; 
         this.selectItem = this.todos.length
         this.$nextTick(() => {

@@ -13,6 +13,8 @@
     "roboto-fontface": "*",
     "sass-loader": "^13.2.0",
     "vue": "^3.2.13",
+    "vue-unique-id": "^3.2.1",
+    "vue-uuid": "^3.0.0",
     "vuetify": "^3.0.0-beta.0",
     "webfontloader": "^1.0.0"
   },
