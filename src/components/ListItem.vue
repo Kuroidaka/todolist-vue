@@ -30,6 +30,7 @@
                     />
 
                     <v-btn 
+                        :disabled="todo.checked?true:false"
                         variant="text"
                         @click="handleOpenEditItem(todo.id, $event)" 
                         style="cursor: pointer; user-selector: none"
