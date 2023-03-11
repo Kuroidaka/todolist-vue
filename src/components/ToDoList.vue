@@ -17,6 +17,7 @@
               v-on:removeItem="removeItem" 
               v-on:editItem="editItem"
               v-on:setToggleEditItem="setToggleEditItem"
+              v-on:addItem="addItem"
               />
           </v-card-text>
         </v-card>
@@ -70,11 +71,14 @@ export default {
         const currentItem = this.todos.find(item => item.id === id)
         currentItem.title = value
       },
-      handleClickAdd () {
-        // this.todos.unshift({title: '', checked: false, id: this.todos.length })
-        this.todos.push({title: 'New Item', checked: false, id: uuid.v4()}); 
+      addItem (newItem) {
+        this.todos.push(newItem); 
         this.todos = [...this.todos]; 
-        this.selectItem = this.todos.length
+      },
+      handleClickAdd () {
+        const newItem = {title: 'New Item', checked: false, id: uuid.v4()}
+        this.addItem(newItem)
+        this.selectItem = ''
         this.$nextTick(() => {
         var element = document.querySelector('.list-wrapper')
         element.scrollTop = element.scrollHeight;
